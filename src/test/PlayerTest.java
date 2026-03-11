@@ -9,8 +9,6 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.model.GearItem;
-import main.model.StatBoost;
 import main.model.simulator.Spell;
 import main.model.simulator.player.Player;
 
@@ -20,22 +18,14 @@ public class PlayerTest {
     private Player enemy2;
     private Spell spell1;
     private Spell spell2;
-    private GearItem hat1;
-    private GearItem hat2;
 
     @BeforeEach
     void runBefore() {
-        player = new Player(100, 4000, 1000);
-        enemy1 = new Player(100, 3000, 1500);
-        enemy2 = new Player(90, 2000, 1000);
+        player = new Player(100, 4000, 1000, null);
+        enemy1 = new Player(100, 3000, 1500, null);
+        enemy2 = new Player(90, 2000, 1000, null);
         spell1 = new Spell("spell1", "life", 300, 100, 70, 50, 5, 10, 100, true);
         spell2 = new Spell("spell2", "death", 1000, 0, 0, 65, 7, 10, 100, false);
-
-        hat1 = new GearItem("hat1", "hat");
-        hat1.addStatBoost(new StatBoost(10, "life", "resist"));
-
-        hat2 = new GearItem("hat2", "hat");
-        hat2.addStatBoost(new StatBoost(50, "life", "pierce"));
     }
 
     @Test
@@ -181,8 +171,8 @@ public class PlayerTest {
 
     @Test
     void testCastSpellOneEnemyNoAoe() {
-        enemy1.getPlayerGear().setHat(hat1);
-        player.getPlayerGear().setHat(hat2);
+        enemy1.getPlayerStats().updateStats("resist", "life", 10);
+        player.getPlayerStats().updateStats("pierce", "life", 50);
 
         player.addEnemy(enemy1);
         player.addSpell(spell1);
@@ -212,9 +202,9 @@ public class PlayerTest {
 
     @Test
     void testCastSpellAoe() {
-        enemy1.getPlayerGear().setHat(hat1);
-        enemy2.getPlayerGear().setHat(hat1);
-        player.getPlayerGear().setHat(hat2);
+        enemy1.getPlayerStats().updateStats("resist", "life", 10);
+        enemy2.getPlayerStats().updateStats("resist", "life", 10);
+        player.getPlayerStats().updateStats("pierce", "life", 50);
 
         player.addEnemy(enemy1);
         player.addEnemy(enemy2);
@@ -246,9 +236,9 @@ public class PlayerTest {
 
     @Test
     void testCastSpellCrit() {
-        hat2.addStatBoost(new StatBoost(100, "life", "critical"));
-        enemy1.getPlayerGear().setHat(hat1);
-        player.getPlayerGear().setHat(hat2);
+        enemy1.getPlayerStats().updateStats("resist", "life", 10);
+        player.getPlayerStats().updateStats("pierce", "life", 50);
+        player.getPlayerStats().updateStats("critical", "life", 100);
 
         player.addEnemy(enemy1);
         player.addSpell(spell1);
@@ -265,11 +255,10 @@ public class PlayerTest {
     @Test
     void testCastSpellMultipleSpells() {
         // spell("spell2", "death", 1000, 0, 0, 65, 7, 10, 100, false);
-        hat2.addStatBoost(new StatBoost(100, "life", "critical"));
-        hat2.addStatBoost(new StatBoost(1, "death", "damage"));
-        
-        enemy1.getPlayerGear().setHat(hat1);
-        player.getPlayerGear().setHat(hat2);
+        enemy1.getPlayerStats().updateStats("resist", "life", 10);
+        player.getPlayerStats().updateStats("pierce", "life", 50);
+        player.getPlayerStats().updateStats("critical", "life", 100);
+        player.getPlayerStats().updateStats("damage", "death", 1);
 
         player.addEnemy(enemy1);
         player.addSpell(spell1);

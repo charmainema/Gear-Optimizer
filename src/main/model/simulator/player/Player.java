@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import main.model.GearCalculator;
+import main.model.simulator.Simulator;
 import main.model.simulator.Spell;
 
 public class Player {
@@ -11,7 +12,6 @@ public class Player {
 
     private int level;
     private PlayerStats stats;
-    private PlayerGear gear;
 
     private ArrayList<Spell> spells;
     private ArrayList<Spell> currentHand;
@@ -22,14 +22,15 @@ public class Player {
     private ArrayList<Player> enemies;
 
     private GearCalculator calculator;
+    private Simulator sim;
 
     // EFFECTS: constructs a player with initial level, health, and mana, and empty
     // stats, gear, spells, hand, shields,
     // and wards, and 1 pip
-    public Player(int level, int health, int mana) {
+    public Player(int level, int health, int mana, Simulator sim) {
         this.level = level;
+        this.sim = sim;
         stats = new PlayerStats(health, mana);
-        gear = new PlayerGear(this);
         spells = new ArrayList<>();
         currentHand = new ArrayList<>();
         pips = 0;
@@ -245,10 +246,6 @@ public class Player {
 
     public int getLevel() {
         return level;
-    }
-
-    public PlayerGear getPlayerGear() {
-        return gear;
     }
 
     public PlayerStats getPlayerStats() {

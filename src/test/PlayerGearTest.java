@@ -45,9 +45,8 @@ public class PlayerGearTest {
         boost3 = new StatBoost(300, null, "health");
 
         initStats();
-
-        player = new Player(100, 24, 24);
-        gear = player.getPlayerGear();
+        player = new Player(100, 24, 24, null);
+        gear = new PlayerGear(player);
     }
 
     @Test
