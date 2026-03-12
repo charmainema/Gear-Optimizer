@@ -1,8 +1,9 @@
 package main.model.simulator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.model.GearItem;
+import main.model.gear.GearItem;
 import main.model.simulator.player.Player;
 import main.model.simulator.player.PlayerGear;
 
@@ -55,13 +56,15 @@ public class Simulator {
 
     // MODIFIES: this
     // EFFECTS: sets gear item for mainPlayer if it exists in gearItems
-    public void setGear(HashMap<String, GearItem> gearItems) {
-        // TODO
+    public void setGear(ArrayList<GearItem> gearItems) {
+        for (GearItem gearItem : gearItems) {
+            gearItem.setGear(gear);
+        }
     }
 
     // EFFECTS: adds enemy to player
-    public void addEnemy() {
-        // TODO
+    public void addEnemy(Player enemy) {
+        mainPlayer.addEnemy(enemy);
     }
 
     // EFFECTS: simulates 1 round of battle, updating summary stats
@@ -81,7 +84,7 @@ public class Simulator {
         return gear;
     }
 
-    public Player getPlayer() {
+    public Player getMainPlayer() {
         return mainPlayer;
     }
 }

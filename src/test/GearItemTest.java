@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.model.GearItem;
 import main.model.StatBoost;
+import main.model.gear.GearItem;
+import main.model.gear.gearType.Robe;
 import main.model.setBonus.SetBonus;
 
 public class GearItemTest {
@@ -16,7 +17,7 @@ public class GearItemTest {
 
     @BeforeEach
     void runBefore() {
-        testGearItem = new GearItem("cool robe", "robe");
+        testGearItem = new Robe("cool robe");
     }
 
     @Test

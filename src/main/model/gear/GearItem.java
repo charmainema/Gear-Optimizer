@@ -1,11 +1,13 @@
-package main.model;
+package main.model.gear;
 
+import main.model.StatBoost;
 import main.model.setBonus.SetBonus;
+import main.model.simulator.player.PlayerGear;
 
 import java.util.ArrayList;
 
 // represents a gear item with item stats
-public class GearItem {
+public abstract class GearItem {
     private String name;
     private String type;
     // dictionary of stat boosts of mapped as stat type : list of stats of said type
@@ -73,4 +75,8 @@ public class GearItem {
     public SetBonus getSetBonus() {
         return setBonus;
     }
+
+    public abstract void setGear(PlayerGear gear);
+
+    public abstract void removeItem(PlayerGear gear);
 }
