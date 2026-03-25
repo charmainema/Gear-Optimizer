@@ -11,6 +11,7 @@ public class Player {
 
     private int level;
     private PlayerStats stats;
+    private boolean isDead;
 
     private ArrayList<Spell> spells;
     private ArrayList<Spell> currentHand;
@@ -35,6 +36,7 @@ public class Player {
         wards = new HashMap<>();
         enemies = new ArrayList<>();
         calculator = new GearCalculator();
+        isDead = false;
     }
 
     public void setLevel(int level) {
@@ -170,6 +172,20 @@ public class Player {
         battleStats.put("healing", 0.0);
     }
 
+    private void removeEnemy(Player player) {
+        enemies.remove(player);
+    }
+
+    // EFFECTS: checks and sets player's isDead field if player's health <= 0
+    // removes dead player from enemies, and removes this player as an enemy from player
+    private void checkPlayerDead(Player player) {
+        if (player.getPlayerStats().getStat("health", null) <= 0) {
+            player.setDead(true);
+            player.removeEnemy(this);
+            removeEnemy(player);
+        }
+    }
+
     // REQUIRES: spell is in current hand, and this player has sufficient mana and
     // pips
     // MODIFIES: this
@@ -190,9 +206,12 @@ public class Player {
         if (spell.getAoe() == true) {
             for (Player enemy : enemies) {
                 battleStats.put("damage", battleStats.get("damage") + (double) doDamage(spell, enemy));
+                checkPlayerDead(enemy);
             }
         } else {
-            battleStats.put("damage", (double) doDamage(spell, enemies.get(enemies.size() - 1)));
+            Player enemy = enemies.get(enemies.size() - 1);
+            battleStats.put("damage", (double) doDamage(spell, enemy));
+            checkPlayerDead(enemy);
         }
 
         updateHand(spell);
@@ -298,6 +317,10 @@ public class Player {
         stats.setStat(type, school, boost);
     }
 
+    public void setDead(boolean isDead) {
+        this.isDead = isDead;
+    }
+
     public void updateStats(String type, String school, int boost) {
         stats.updateStats(type, school, boost);
     }
@@ -336,5 +359,9 @@ public class Player {
 
     public ArrayList<Player> getEnemies() {
         return enemies;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }

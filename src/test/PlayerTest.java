@@ -329,6 +329,7 @@ public class PlayerTest {
         player.castSpell(spell1);
 
         assertEquals(460, enemy1.getPlayerStats().getStat("health", null));
+
         assertEquals(4200, player.getPlayerStats().getStat("health", null));
         assertEquals(0, player.getPips());
         assertEquals(player.getPlayerStats().getStat("mana", null), manaBoost - spell1.getRequiredMana());
