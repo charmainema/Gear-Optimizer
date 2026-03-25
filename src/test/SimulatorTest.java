@@ -10,8 +10,8 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.model.StatBoost;
 import main.model.gear.GearItem;
+import main.model.gear.StatBoost;
 import main.model.gear.gearType.Hat;
 import main.model.gear.gearType.Mount;
 import main.model.gear.gearType.Robe;

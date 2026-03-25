@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.model.StatBoost;
 import main.model.gear.GearItem;
+import main.model.gear.StatBoost;
 import main.model.gear.gearType.Robe;
-import main.model.setBonus.SetBonus;
+import main.model.gear.setBonus.SetBonus;
 
 public class GearItemTest {
     private GearItem testGearItem;

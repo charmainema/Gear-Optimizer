@@ -1,7 +1,6 @@
 package main.model.gear;
 
-import main.model.StatBoost;
-import main.model.setBonus.SetBonus;
+import main.model.gear.setBonus.SetBonus;
 import main.model.simulator.player.PlayerGear;
 
 import java.util.ArrayList;

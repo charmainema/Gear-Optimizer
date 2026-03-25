@@ -1,9 +1,9 @@
-package main.model.setBonus;
+package main.model.gear.setBonus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.model.StatBoost;
+import main.model.gear.StatBoost;
 
 // represents a set bonus tier with a list of stat boosts
 public class Tier {

@@ -7,8 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.model.StatBoost;
-import main.model.setBonus.Tier;
+import main.model.gear.StatBoost;
+import main.model.gear.setBonus.Tier;
 
 public class TierTest {
     private Tier testTier;

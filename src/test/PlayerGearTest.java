@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.model.StatBoost;
 import main.model.gear.GearItem;
+import main.model.gear.StatBoost;
 import main.model.gear.gearType.Amulet;
 import main.model.gear.gearType.Athame;
 import main.model.gear.gearType.Boots;

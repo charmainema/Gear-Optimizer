@@ -1,4 +1,4 @@
-package main.model;
+package main.model.gear;
 
 // represents a gear stat with an integer boost value, school, and name
 // stat boosts are considered equal if they have the same school and type

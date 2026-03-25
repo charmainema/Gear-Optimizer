@@ -1,4 +1,4 @@
-package main.model.setBonus;
+package main.model.gear.setBonus;
 
 import java.util.ArrayList;
 import java.util.List;

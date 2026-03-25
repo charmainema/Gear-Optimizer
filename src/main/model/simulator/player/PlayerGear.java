@@ -1,7 +1,7 @@
 package main.model.simulator.player;
 
-import main.model.StatBoost;
 import main.model.gear.GearItem;
+import main.model.gear.StatBoost;
 
 public class PlayerGear {
     private GearItem hat;
