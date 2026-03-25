@@ -53,7 +53,7 @@ public class Simulator {
     private void pipAll() {
         updatePips(mainPlayer);
 
-        for (Player enemy : mainPlayer.getEnemies()) {
+        for (Player enemy : getEnemies()) {
             updatePips(enemy);
         }
     }
@@ -75,7 +75,7 @@ public class Simulator {
     // EFFECTS: all enemies and main player cast a random spell from their deck,
     // update battleStats
     private void castEnemies(HashMap<String, Double> battleStats) {
-        for (Player enemy : mainPlayer.getEnemies()) {
+        for (Player enemy : getEnemies()) {
             double enemyDamage = enemy.castRandom().get("damage");
             battleStats.put("damage received", battleStats.getOrDefault("damage received", 0.0) + enemyDamage);
         }
@@ -90,12 +90,13 @@ public class Simulator {
         pipAll();
         castMainPlayer(battleStats);
         castEnemies(battleStats);
+        battleStats.put("total rounds", battleStats.getOrDefault("total rounds", 0.0) + 1.0);
     }
 
     private void initBattleStats(HashMap<String, Double> battleStats) {
         battleStats.put("max damage", 0.0);
         battleStats.put("total damage", 0.0);
-        battleStats.put("total rounds", 1.0);
+        battleStats.put("total rounds", 0.0);
         battleStats.put("damage received", 0.0);
         battleStats.put("total healing", 0.0);
         battleStats.put("total blocked", 0.0);
@@ -105,10 +106,13 @@ public class Simulator {
     // mainPlayer's enemies die, returns battle summary stats such as total damage
     // dealt, total damage received, num rounds, etc.
     public HashMap<String, Double> simulate() {
-        // TODO: simulate rounds while player isn't dead or player still has enemies
         HashMap<String, Double> battleStats = new HashMap<>();
         initBattleStats(battleStats);
-        simulateRound(battleStats);
+
+        while (!mainPlayer.isDead() && getEnemies().size() > 0) {
+            simulateRound(battleStats);
+        }
+
         return battleStats;
     }
 
@@ -118,5 +122,9 @@ public class Simulator {
 
     public Player getMainPlayer() {
         return mainPlayer;
+    }
+
+    public ArrayList<Player> getEnemies() {
+        return mainPlayer.getEnemies();
     }
 }
