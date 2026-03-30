@@ -33,4 +33,8 @@ public class GearOptimizer {
     public Player getMainPlayer() {
         return new Player(0, 0, 0);
     }
+
+    public Simulator getSimulator() {
+        return sim;
+    }
 }

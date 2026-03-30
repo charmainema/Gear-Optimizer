@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.model.GearOptimizer;
+import main.model.simulator.Simulator;
 import main.model.simulator.player.Player;
 import main.model.simulator.player.PlayerGear;
 
@@ -37,5 +38,8 @@ public class GearOptimizerTest {
         // optimizer will create the player, so getter should not return null
         Player player = optimizer.getMainPlayer();
         assertNotNull(player);
+
+        Simulator sim = optimizer.getSimulator();
+        assertNotNull(sim);
     }
 }
