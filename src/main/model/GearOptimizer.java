@@ -6,27 +6,27 @@ import java.util.HashMap;
 import main.model.gear.GearItem;
 import main.model.simulator.Simulator;
 import main.model.simulator.player.Player;
-import main.model.simulator.player.PlayerGear;
 
 public class GearOptimizer {
-    private ArrayList<HashMap<String, PlayerGear>> gearSets;
+    private HashMap<String, ArrayList<GearItem>> gearSets;
     private Simulator sim;
 
     public GearOptimizer(int level, int health, int mana) {
         // TODO
     }
 
-    public void addGearSet(String name, PlayerGear gear) {
+    // EFFECTS: adds a PlayerGear to gearSets using gear array
+    public void addGearSet(String name, ArrayList<GearItem> gear) {
         // TODO
     }
 
     // EFFECTS: Returns the best possible set of gear from gearSets
-    public HashMap<String, GearItem> optimizeGear() {
+    public HashMap<String, ArrayList<GearItem>> optimizeGear() {
         // TODO
         return new HashMap<>();
     }
 
-    public ArrayList<HashMap<String, PlayerGear>> getGearSets() {
+    public HashMap<String, ArrayList<GearItem>> getGearSets() {
         return gearSets;
     }
 

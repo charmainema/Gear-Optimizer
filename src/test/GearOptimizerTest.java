@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,26 +10,37 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.model.GearOptimizer;
+import main.model.gear.GearItem;
+import main.model.gear.StatBoost;
+import main.model.gear.gearType.Amulet;
+import main.model.gear.gearType.Hat;
 import main.model.simulator.Simulator;
 import main.model.simulator.player.Player;
-import main.model.simulator.player.PlayerGear;
 
 public class GearOptimizerTest {
     private GearOptimizer optimizer;
+    private ArrayList<GearItem> worstGear;
+    private ArrayList<GearItem> bestGear;
 
     @BeforeEach
     void runBefore() {
         optimizer = new GearOptimizer(100, 100, 100);
+        worstGear = new ArrayList<>();
+        bestGear = new ArrayList<>();
+        initGear();
     }
 
     @Test
     void testAddGearSetOneSet() {
-        PlayerGear gear = new PlayerGear(optimizer.getMainPlayer());
+        ArrayList<GearItem> gear = new ArrayList<>();
+        gear.add(new Amulet("cool amulet"));
         optimizer.addGearSet("set 1", gear);
 
-        ArrayList<HashMap<String, PlayerGear>> gearSets = optimizer.getGearSets();
+        HashMap<String, ArrayList<GearItem>> gearSets = optimizer.getGearSets();
         assertEquals(1, gearSets.size());
-        assertEquals(gear, gearSets.get(0));
+
+        assertEquals(1, gearSets.keySet().size());
+        assertEquals("cool amulet", gearSets.get("set 1").get(0).getName());
     }
 
     @Test
@@ -41,5 +51,24 @@ public class GearOptimizerTest {
 
         Simulator sim = optimizer.getSimulator();
         assertNotNull(sim);
+    }
+
+    @Test
+    void testOptimizeGearOneSet() {
+        optimizer.addGearSet("best", bestGear);
+        optimizer.addGearSet("worst", worstGear);
+        
+        HashMap<String, ArrayList<GearItem>> optimizedGear = optimizer.optimizeGear();
+        assertNotNull(optimizedGear.get("best"));
+    }
+
+    private void initGear() {
+        GearItem bestHat = new Hat("best hat");
+        bestHat.addStatBoost(new StatBoost(100, "life", "damage"));
+        bestGear.add(bestHat);
+
+        GearItem worstHat = new Hat("worst hat");
+        bestHat.addStatBoost(new StatBoost(10, "life", "damage"));
+        worstGear.add(worstHat);
     }
 }
