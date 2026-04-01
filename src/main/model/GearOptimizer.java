@@ -12,12 +12,13 @@ public class GearOptimizer {
     private Simulator sim;
 
     public GearOptimizer(int level, int health, int mana) {
-        // TODO
+        gearSets = new HashMap<>();
+        sim = new Simulator(level, health, mana);
     }
 
     // EFFECTS: adds a PlayerGear to gearSets using gear array
     public void addGearSet(String name, ArrayList<GearItem> gear) {
-        // TODO
+        gearSets.put(name, gear);
     }
 
     // EFFECTS: Returns the best possible set of gear from gearSets
@@ -31,7 +32,7 @@ public class GearOptimizer {
     }
 
     public Player getMainPlayer() {
-        return new Player(0, 0, 0);
+        return sim.getMainPlayer();
     }
 
     public Simulator getSimulator() {
