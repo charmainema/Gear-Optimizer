@@ -105,12 +105,17 @@ public class Simulator {
     // EFFECTS: simulates battle until either mainPlayer dies, or all of
     // mainPlayer's enemies die, returns battle summary stats such as total damage
     // dealt, total damage received, num rounds, etc.
+    // if player dies, return null
     public HashMap<String, Double> simulate() {
         HashMap<String, Double> battleStats = new HashMap<>();
         initBattleStats(battleStats);
 
         while (!mainPlayer.isDead() && getEnemies().size() > 0) {
             simulateRound(battleStats);
+        }
+
+        if (mainPlayer.isDead()) {
+            return null;
         }
 
         return battleStats;
