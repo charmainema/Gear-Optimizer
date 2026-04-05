@@ -56,6 +56,18 @@ public class GearOptimizerTest {
     @Test
     void testOptimizeGearOneSet() {
         optimizer.addSpellToPlayer("some spell", "life", 100, 0, 0, 0, 0, 0, 100, false);
+        optimizer.addGearSet("worst", worstGear);
+
+        optimizer.addEnemy(10, 2000, 10000);
+        optimizer.addSpellToEnemy(0, "another spell", "fire", 100, 0, 0, 0, 0, 0, 100, false);
+        
+        HashMap<String, ArrayList<GearItem>> optimizedGear = optimizer.optimizeGear();
+        assertNotNull(optimizedGear.get("worst"));
+    }
+
+    @Test
+    void testOptimizeGearMultipleSets() {
+        optimizer.addSpellToPlayer("some spell", "life", 100, 0, 0, 0, 0, 0, 100, false);
         optimizer.addGearSet("best", bestGear);
         optimizer.addGearSet("worst", worstGear);
 
