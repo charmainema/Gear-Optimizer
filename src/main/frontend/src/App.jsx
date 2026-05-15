@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
 
 function App() {
     const [input, setInput] = useState("");
@@ -25,7 +29,6 @@ function App() {
     return (
         <div style={{ padding: "2rem", fontFamily: "Arial" }}>
             <h1>Gear Optimizer</h1>
-
             <input
                 type="text"
                 placeholder="Enter input..."
@@ -36,7 +39,7 @@ function App() {
 
             <br /><br />
 
-            <button onClick={handleSubmit}>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>
                 Optimize
             </button>
 
